@@ -12,6 +12,7 @@ import android.util.Log;
 public class SensorManagerModule extends ReactContextBaseJavaModule {
     private static final String		REACT_CLASS = "SensorManager";
     private AccelerometerRecord		mAccelerometerRecord = null;
+  private LinearAccelerationRecord		mLinearAccelerationRecord = null;
 	private GyroscopeRecord 		mGyroscopeRecord = null;
 	private MagnetometerRecord		mMagnetometerRecord = null;
 	private StepCounterRecord		mStepCounterRecord = null;
@@ -44,6 +45,19 @@ public class SensorManagerModule extends ReactContextBaseJavaModule {
     public void stopAccelerometer() {
 		if (mAccelerometerRecord != null)
 			mAccelerometerRecord.stop();
+    }
+
+    @ReactMethod
+    public int startLinearAcceleration(int delay) {
+		if (mLinearAccelerationRecord == null)
+			mLinearAccelerationRecord = new LinearAccelerationRecord(mReactContext);
+		return (mLinearAccelerationRecord.start(delay));
+    }
+
+    @ReactMethod
+    public void stopLinearAcceleration() {
+		if (mLinearAccelerationRecord != null)
+			mLinearAccelerationRecord.stop();
     }
 
     @ReactMethod
